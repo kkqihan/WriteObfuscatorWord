@@ -1,5 +1,8 @@
 FunckHelper = {}
 
+--设置随机种子
+math.randomseed(os.time())
+
 function FunckHelper:Test()
     print("FunckHelper:Test()")
 end
