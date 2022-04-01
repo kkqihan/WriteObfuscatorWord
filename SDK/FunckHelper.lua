@@ -81,15 +81,11 @@ end
 function FunckHelper:IsKeyWord(word)
     local isKeyWord = true
 
-    --检查长度
-    local wordLength = #word
-    if wordLength > 5 then
-        isKeyWord = false
-    end
     --检查字符内容
+    local wordLength = #word
     for charIdx = 1, wordLength do
         local char = string.sub(word, charIdx, charIdx)
-        if char >= "a" and char <= "z" then
+        if (char >= "a" and char <= "z") or (char >= "A" and char <= "Z") then
         else
             isKeyWord = false
             break
@@ -104,37 +100,30 @@ function FunckHelper:IsKeyWord(word)
 end
 
 --生成重命名的单词
-function FunckHelper:GenerateRenameWord(allWordArr, unuseWordArr, usedWordMap)
+function FunckHelper:GenerateRenameWord(allWordArr, usedWordMap)
     local newWord = nil
 
-    --寻找新单词
-    local unuseWordLengh = #unuseWordArr
-    if unuseWordLengh > 0 then --先从没用过的单词数组中找
-        local wordIdx = math.random(1, unuseWordLengh)
-        newWord = table.remove(unuseWordArr, wordIdx)
-    else --没有就组合生成
-        --进行合成
-        local composeWord = ""
-        local allWordNum = #allWordArr
-        local tryComposeCount = 2
-        while (true) do
-            --单词拼接
-            for composeIdx = 1, tryComposeCount, 1 do
-                local wordIdx = math.random(1, allWordNum)
-                composeWord = composeWord .. allWordArr[wordIdx]
-            end
-            --判断是否合格
-            if usedWordMap[composeWord] then --已经使用过，则增加长度，继续组合
-                tryComposeCount = tryComposeCount + 1
-            else --没有用过，则采用
-                newWord = composeWord
-                break
-            end
+    --进行合成
+    local composeWord = ""
+    local allWordNum = #allWordArr
+    local tryComposeCount = 2
+    while (true) do
+        --单词拼接
+        for composeIdx = 1, tryComposeCount, 1 do
+            local wordIdx = math.random(1, allWordNum)
+            composeWord = composeWord .. allWordArr[wordIdx]
         end
-
-        --更新已经使用过单词的列表,防止生成时重复
-        usedWordMap[newWord] = true
+        --判断是否合格
+        if usedWordMap[composeWord] then --已经使用过，则增加长度，继续组合
+            tryComposeCount = tryComposeCount + 1
+        else --没有用过，则采用
+            newWord = composeWord
+            break
+        end
     end
+
+    --更新已经使用过单词的列表,防止生成时重复
+    usedWordMap[newWord] = true
 
     return newWord
 end
