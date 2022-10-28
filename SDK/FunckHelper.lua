@@ -101,7 +101,7 @@ end
 
 --生成重命名的单词
 function FunckHelper:GenerateRenameWord(allWordArr, usedWordMap)
-    local newWord = nil
+    local newWord
 
     --进行合成
     local composeWord = ""
@@ -109,7 +109,7 @@ function FunckHelper:GenerateRenameWord(allWordArr, usedWordMap)
     local tryComposeCount = 2
     while (true) do
         --单词拼接
-        for composeIdx = 1, tryComposeCount, 1 do
+        for _ = 1, tryComposeCount, 1 do
             local wordIdx = math.random(1, allWordNum)
             composeWord = composeWord .. allWordArr[wordIdx]
         end
