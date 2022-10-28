@@ -49,21 +49,26 @@ function FunckHelper:WriteFile(path, content)
 end
 
 --一行一行的处理文本
-function FunckHelper:HandTextFilePerLine(path, handleFunc)
-    --读取文件
-    ----打开文件
+function FunckHelper:HandTextFilePerRenameWord(path, handleFunc)
+    local renameMapDataTextStr, renameNum = nil, 0
+
+    --读取文件到数据中
     local file = io.open(path, "r")
-    ----逐行读取
-    while (true) do
-        local lineStr = file:read("*l")
-        if lineStr then
-            handleFunc(lineStr)
-        else
-            break
+    local fileText = file:read("*a")
+    local renameMapData = json.decode(fileText)
+    io.close(file)
+    --进行关键词替换
+    for _, typeGroupInfo in pairs(renameMapData.MemberTyp_Mapping) do
+        local renameMapArr = typeGroupInfo.Mapping
+        for renameKey, _ in pairs(renameMapArr) do
+            renameMapArr[renameKey] = handleFunc()
+            renameNum = renameNum + 1
         end
     end
-    ----关闭文件
-    io.close(file)
+    --填入返回值
+    renameMapDataTextStr = json.encode(renameMapData)
+
+    return renameMapDataTextStr, renameNum
 end
 
 --浅拷贝数组

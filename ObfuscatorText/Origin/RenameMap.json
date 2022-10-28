@@ -1,0 +1,33 @@
+{
+    "MemberTyp_Mapping": {
+        "Namespace": {
+            "MemberType": "Namespace",
+            "Mapping": {}
+        },
+        "Type": {
+            "MemberType": "Type",
+            "Mapping": {}
+        },
+        "Method": {
+            "MemberType": "Method",
+            "Mapping": {
+                "Assembly-CSharp|System.Int32 Test::GetVal()": "b"
+            }
+        },
+        "Field": {
+            "MemberType": "Field",
+            "Mapping": {
+                "Assembly-CSharp|System.Int32 Test::a": "c"
+            }
+        },
+        "Property": {
+            "MemberType": "Property",
+            "Mapping": {}
+        },
+        "Event": {
+            "MemberType": "Event",
+            "Mapping": {}
+        }
+    },
+    "Version": "4.0"
+}
