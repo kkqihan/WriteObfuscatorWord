@@ -158,10 +158,12 @@ function FunckHelper:ReadJsonFile(path)
 
     local function parseObject()
         local obj = {}
+        local order = {}
         pos = pos + 1 -- skip {
         skipWs()
         if content:sub(pos,pos) == '}' then
             pos = pos + 1
+            obj.__key_order = order
             return obj
         end
         while true do
@@ -175,6 +177,7 @@ function FunckHelper:ReadJsonFile(path)
             local val,err2 = parseValue()
             if err2 then return nil, err2 end
             obj[key] = val
+            table.insert(order, key)
             skipWs()
             local c = content:sub(pos,pos)
             if c == ',' then
@@ -186,6 +189,7 @@ function FunckHelper:ReadJsonFile(path)
                 return nil, 'expected , or }'
             end
         end
+        obj.__key_order = order
         return obj
     end
 
@@ -233,11 +237,26 @@ local function encodeJson(val, buf)
         else
             table.insert(buf, '{')
             local first = true
-            for k,v in pairs(val) do
-                if not first then table.insert(buf, ',') end
-                table.insert(buf, '"'..k..'":')
-                encodeJson(v, buf)
-                first = false
+            local order = val.__key_order
+            if order and type(order)=='table' then
+                for _,k in ipairs(order) do
+                    if k ~= '__key_order' then
+                        local v = val[k]
+                        if not first then table.insert(buf, ',') end
+                        table.insert(buf, '"'..k..'":')
+                        encodeJson(v, buf)
+                        first = false
+                    end
+                end
+            else
+                for k,v in pairs(val) do
+                    if k ~= '__key_order' then
+                        if not first then table.insert(buf, ',') end
+                        table.insert(buf, '"'..k..'":')
+                        encodeJson(v, buf)
+                        first = false
+                    end
+                end
             end
             table.insert(buf, '}')
         end

@@ -20,8 +20,8 @@
         "AOTMain|UnitySourceGeneratedAssemblyMonoScriptTypes_v1": "",
         "AOTMain|Platform.AdjustApi": "s",
         "AOTMain|Platform.DeepLinkApi": "w",
-        "AOTMain|Platform.IosBridge": "z",
-        "AOTMain|Platform.PlatformApi": "ba",
+        "AOTMain|Platform.IosBridge": "tttt",
+        "AOTMain|Platform.PlatformApi": "hahaha",
         "AOTMain|Platform.PlatformSDK": "bb",
         "AOTMain|Platform.ShareApi": "bc",
         "AOTMain|CoreSlots.CrushEventType": "bd",
@@ -1357,15 +1357,12 @@
         "AOTMain|System.Object HotUpdate.VersionManager/<SelectBootVersionAsync>d__16::System.Collections.Generic.IEnumerator<System.Object>.Current()": "bzn",
         "AOTMain|System.Object HotUpdate.VersionManager/<SelectBootVersionAsync>d__16::System.Collections.IEnumerator.Current()": "bzo",
         "AOTMain|System.Object HotUpdate.VersionManager/<VerifyBootVersionAsync>d__18::System.Collections.Generic.IEnumerator<System.Object>.Current()": "bzp",
-        "AOTMain|System.Object HotUpdate.VersionManager/<VerifyBootVersionAsync>d__18::System.Collections.IEnumerator.Current()": "bzq",
+        "AOTMain|System.Object HotUpdate.VersionManager/<VerifyBootVersionAsync>d__18::System.Collections.IEnumerator.Current()": "ggggg",
         "AOTMain|System.Object HotUpdate.VersionManager/<VerifySingleBootFileAsync>d__19::System.Collections.Generic.IEnumerator<System.Object>.Current()": "bzr",
         "AOTMain|System.Object HotUpdate.VersionManager/<VerifySingleBootFileAsync>d__19::System.Collections.IEnumerator.Current()": "bzs"
       }
     },
-    "Event": {
-      "MemberType": "Event",
-      "Mapping": {}
-    }
+    "Event": { "MemberType": "Event", "Mapping": {} }
   },
   "Version": "4.0"
 }

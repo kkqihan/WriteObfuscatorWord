@@ -14,7 +14,7 @@ local mode = arg and arg[1] or "txt"
 
 if mode == "json" then
     print("[Mode] json")
-    local originJsonPath = "ObfuscatorText/Origin/RenameMap_Source.json"
+    local originJsonPath = "ObfuscatorText/Origin/RenameMap_Result.json"
     local handledJsonPath = "ObfuscatorText/Handled/RenameMap_Source.json"
 
     local root, err = FunckHelper:ReadJsonFile(originJsonPath)
